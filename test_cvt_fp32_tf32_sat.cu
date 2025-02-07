@@ -16,7 +16,7 @@ __global__ void test_fp32_tf32_cvt(const float  *input, float *output, int n) {
     if (tid < n) {
         unsigned int storage = reinterpret_cast<unsigned const &>(input[tid]);
         asm volatile ("cvt.rna.satfinite.tf32.f32  %0, %1 ;" : "=r"(storage) : "r"(storage));
-        output[tid] = storage;
+        output[tid] = reinterpret_cast<float &>（storage）;
     }
 }
 
